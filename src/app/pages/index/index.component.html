@@ -1,0 +1,39 @@
+<div *ngIf="q !== undefined" id="search_result">
+    <h2 *ngIf='q == ""; else notEmpty'>You entered an empty search term</h2>
+    <ng-template #notEmpty>
+        <h2>Search results: {{ q }}</h2>
+        <p *ngIf='movies && movies.length == 0'>Nothing found</p>
+    </ng-template>
+</div>
+<ng-container *ngIf="q == undefined || (movies && movies.length !== 0)">
+    <table>
+        <tr>
+            <td rowspan="2">
+                <div class="header">
+                    <h3 *ngIf="genreTitle">{{genreTitle}}</h3>
+                </div>
+            </td>
+            <td class="section_bg"></td>
+            <td class="section_right"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table class="sort">
+                    <tr>
+                        <td>Sort by:</td>
+                        <td>price (<a (click)="onClick('price', '1')" routerLink="./" [queryParams]="{sort: 'price', up: 1 }" queryParamsHandling="merge">asc.</a> | <a (click)="onClick('price', '0')" routerLink="./" [queryParams]="{sort: 'price', up: 0 }" queryParamsHandling="merge">desc.</a>)
+                        <td>title (<a (click)="onClick('title', '1')" routerLink="./" [queryParams]="{sort: 'title', up: 1 }" queryParamsHandling="merge">asc.</a> | <a (click)="onClick('title', '0')" routerLink="./" [queryParams]="{sort: 'title', up: 0 }" queryParamsHandling="merge">desc.</a>)
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table class="products">
+        <tr *ngFor="let movieRow of moviesRows; let i = index">
+            <td *ngFor="let movie of movies | slice:i*4:i*4+4">
+        <app-movie-box [movie]="movie" class="intro_product">
+        </app-movie-box>  
+        </td>
+        </tr>
+    </table>
+</ng-container>

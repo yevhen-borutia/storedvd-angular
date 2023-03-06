@@ -1,0 +1,11 @@
+            <div id="menu">
+                <div class="header">
+                    <h3>Sections</h3>
+                </div>
+                <div id="items">
+                        <p *ngFor="let genre of genres">
+                            <a routerLink="/section/{{genre.id}}">{{genre.title}}</a>
+                        </p>
+                </div>
+                <div class="bottom"></div>
+            </div>

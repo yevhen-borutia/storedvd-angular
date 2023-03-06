@@ -1,0 +1,88 @@
+    <div id="order">
+        <h2>Checkout</h2>
+
+        <form #formDir="ngForm" method="post" [formGroup]="form" (ngSubmit)="onSubmit()">
+<!--                    <div *ngIf="formDir.submitted || formDir.touched"
+    class="alert alert-danger">-->
+
+  <div *ngIf="(form.get('name')?.touched || formDir.submitted) && form.get('name')?.errors?.['required']">
+    Name is required.
+  </div>
+  <div *ngIf="(form.get('email')?.touched || formDir.submitted) && form.get('email')?.errors?.['required']">
+    Email is required.
+  </div>
+  <div *ngIf="form.get('email')?.errors?.['email']">
+    Email field should be correct email.
+  </div>
+  <div *ngIf="(form.get('phone')?.touched || formDir.submitted) && form.get('phone')?.errors?.['required']">
+    Phone number is required.
+  </div>
+  <div *ngIf="form.get('phone')?.errors?.['pattern']">
+    Phone field should be phone number.
+  </div>
+  <div *ngIf="(form.get('delivery_type')?.touched || formDir.submitted) && form.get('delivery_type')?.errors?.['required']">
+    Delivery type is required.
+  </div>
+  <div *ngIf="(form.get('address')?.touched || formDir.submitted) && form.get('address')?.errors?.['required']">
+    Address is required.
+  </div>
+<div *ngIf='formDir.submitted && cartService.getCartItems().length === 0'>
+    Cart is empty
+</div>
+<div *ngIf='serverErrors'>
+    <div *ngFor='let error of serverErrors | keyvalue'>
+        {{error.value}}
+    </div>
+</div>
+<!--</div>-->
+            <table>
+                <tbody><tr>
+                    <td class="w120">Full name:</td>
+                    <td>
+                        <input type="text" name="name" formControlName="name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone number:</td>
+                    <td>
+                        <input type="text" name="phone" formControlName="phone">
+                    </td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>
+                        <input type="text" name="email" formControlName="email">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Delivery:</td>
+                    <td>
+                        <select formControlName="delivery_type" name="delivery_type" >
+                            <option value="">choose, please...</option>
+                            <option *ngFor="let delivery_type of delivery_types" [value]="delivery_type.type">{{delivery_type.description}}</option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody></table>
+            <table>
+                <tbody><tr  [hidden]="hide_address" id="address">
+                    <td>
+                        <p>Full address (Country, city, zip code, street, house, apartment):</p>
+                        <textarea formControlName="address" name="address" cols="80" rows="6"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Order note:</p>
+                        <textarea formControlName="notice" name="notice" cols="80" rows="6"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="button">
+                        <input type="hidden" name="func" value="order">
+                        <input type="submit" class="fin_check" value="Finish checkout" alt="Закончить оформление заказа">
+                    </td>
+                </tr>
+                </tbody></table>
+        </form>
+    </div>

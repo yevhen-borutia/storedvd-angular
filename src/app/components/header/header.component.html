@@ -1,0 +1,13 @@
+    <div id="header">
+        <img src="assets/header.png" alt="Шапка" />
+        <div>
+            <p class="red">8-800-123-45-67</p>
+            <p class="blue">Opening hours from 9AM to 9PM without breaks and days off</p>
+        </div>
+<div class="cart">
+    <p class="cart_title">Cart</p>
+    <p class="blue">Current order</p>
+    <p>In the cart <span>{{cartService.getQuantity()}}</span> of goods<br />for <span>{{cartService.getTotal()}}</span> cad.</p>
+    <a routerLink="/cart">Go to cart</a>
+</div>
+    </div>

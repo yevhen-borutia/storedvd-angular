@@ -1,0 +1,32 @@
+    <div id="topmenu">
+        <ul>
+            <li>
+                <a routerLink="/">MAIN</a>
+            </li>
+            <li>
+                <img src="/assets/topmenu_border.png" alt="" />
+            </li>
+            <li>
+                <a routerLink="/delivery">PAYMENT AND DELIVERY</a>
+            </li>
+            <li>
+                <img src="/assets/topmenu_border.png" alt="" />
+            </li>
+            <li>
+                <a routerLink="/contacts">CONTACTS</a>
+            </li>
+        </ul>
+        <div id="search">
+            <form name="search" action="/search" method="get" (ngSubmit)="searchThis()">
+                <table>
+                    <tbody><tr>
+                        <td class="input_left"></td>
+                        <td>
+                            <input type="text"  [(ngModel)]="q" name="q" value="search" onfocus="if(this.value == 'search') this.value=''" onblur="if(this.value == '') this.value='search'">
+                        </td>
+                        <td class="input_right"></td>
+                    </tr>
+                    </tbody></table>
+            </form>
+        </div>
+    </div>

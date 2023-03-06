@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Online store</title>
+    </head>
+    <body>
+        <div id="container">
+            <app-header></app-header>
+            <app-topmenu></app-topmenu>
+            <div id="content">
+                <div id="left">
+                    <app-sections></app-sections>
+                </div>
+                <div id="right">
+                    <router-outlet></router-outlet>
+                </div>
+                <div class="clear"></div>
+                <app-footer></app-footer>
+            </div>
+        </div>
+    </body>
+</html>

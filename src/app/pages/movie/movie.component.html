@@ -1,0 +1,64 @@
+<ng-container *ngIf="movie && genre">  
+<table id="hornav">
+        <tbody><tr>
+            <td>
+                <a routerLink="/">Main</a>
+            </td>
+            <td>
+                <img src="/assets/hornav_arrow.png" alt="">
+            </td>
+            <td>
+                <a routerLink="/section/{{genre.id}}">{{genre.title}}</a>
+            </td>
+            <td>
+                <img src="/assets/hornav_arrow.png" alt="">
+            </td>
+            <td>{{movie.title}}</td>
+        </tr>
+        </tbody></table>
+    <table  id="product">
+        <tbody><tr>
+            <td class="product_img">
+                <img src="{{serverUrl}}storage/{{movie.img}}" alt="" />
+            </td>
+            <td  class="product_desc">
+                <p>Title: <span class="title">{{ movie.title }}</span></p>
+                <p>Year of release: <span>{{ movie.year }}</span></p>
+                <p>Genre: <span>{{ genre.title }}</span></p>
+                <p>Country of release: <span>{{ movie.country }}</span></p>
+                <p>Director: <span>{{ movie.director }}</span></p>
+                <p>Play: <span>{{ movie.play }}</span></p>
+                <p>Cast: <span>{{ movie.cast }}</span></p>
+                <table>
+                    <tbody><tr>
+                        <td>
+                            <p class="price">{{ movie.price }} cad</p>
+                        </td>
+                        <td>
+        <app-add-to-cart-button [movie]="movie"></app-add-to-cart-button>
+
+                        </td>
+                    </tr>
+                    </tbody></table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <p class="desc_title">Description:</p>
+                <p class="desc">{{ movie.description }}</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="others">
+        <h3>Also ordered with this product:</h3>
+        <table class="products">
+            <tbody><tr>
+            <td *ngFor="let movie of movies">
+        <app-movie-box [movie]="movie" class="intro_product">
+        </app-movie-box>  
+        </td> 
+            </tr>
+            </tbody></table>
+    </div>
+</ng-container>

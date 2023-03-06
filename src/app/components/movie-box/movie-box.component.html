@@ -1,0 +1,12 @@
+<td *ngIf="movie">
+    <div *ngIf="movie" class="intro_product">
+        <p class="img">
+            <img src="{{serverUrl}}/storage/{{movie.img}}" alt="" />
+        </p>
+        <p class="title">
+            <a routerLink="/product/{{movie.id}}">{{movie.title}}</a>
+        </p>
+        <p class="price">{{movie.price}} cad</p>
+        <app-add-to-cart-button [movie]="movie"></app-add-to-cart-button>
+    </div>
+</td>

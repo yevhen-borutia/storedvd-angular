@@ -1,0 +1,99 @@
+<div id="cart">
+    <h2>Cart</h2>
+        <form method="post">
+    <table>
+        <tr>
+            <td colspan="8" id="cart_top"></td>
+        </tr>
+        <tr>
+            <td class="cart_left"></td>
+            <td colspan="2">Product</td>
+            <td>Price for 1 item.</td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td></td>
+            <td class="cart_right"></td>
+        </tr>
+        <tr>
+            <td class="cart_left"></td>
+            <td colspan="6">
+                <hr />
+            </td>
+            <td class="cart_right"></td>
+        </tr>
+        <tr *ngFor="let movie of cartService.getCartItems()" class="cart_row">
+            <td class="cart_left"></td>
+            <td class="img">
+                <img src="{{serverUrl}}storage/{{movie.img}}" alt="" />
+            </td>
+            <td class="title">{{movie.name}}</td>
+            <td>{{movie.price}} cad.</td>
+            <td>
+                <table class="count">
+                    <tr>
+                        <td>
+                            <input type="number" min="1" [value]="movie.quantity" (change)="cartService.changeQuantity(movie, $event)" oninput="if(!/^[1-9]\d*$/.test(event.target.value)) event.target.value = event.target.dataset.previousValue || '';  else  event.target.dataset.previousValue = event.target.value;">
+                        </td>
+                        <td>items.</td>
+                    </tr>
+                </table>
+            </td>
+            <td class="bold">{{movie.price * movie.quantity}} cad.</td>
+            <td>
+                <a href="#" (click)="cartService.removeFromCart(movie); $event.preventDefault(); $event.stopPropagation();" class="link_delete">x delete</a>
+            </td>
+            <td class="cart_right"></td>
+        </tr>
+        <tr>
+            <td class="cart_left"></td>
+            <td colspan="6" class="cart_border">
+                <hr />
+            </td>
+            <td class="cart_right"></td>
+        </tr>
+
+        <tr id="discount">
+            <td class="cart_left"></td>
+            <td colspan="6">
+                <table>
+                    <tr>
+                        <td>Enter discount coupon number<br /><span>(if available)</span></td>
+                        <td>
+                            <input id="d" type="text" [(ngModel)]="discount" (change)="onDiscChange($event);" name="discount">
+                        </td>
+                        <td>
+                            <input type="submit" class="apply_disc" value="Apply discount code" alt="Получить скидку" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="cart_right"></td>
+        </tr>
+        <tr id="summa">
+            <td class="cart_left"></td>
+            <td colspan="6">
+                <p>Total <span *ngIf="cartService.getDiscountCode()">(with discount)</span>: <span class="price">{{cartService.getTotal()}} cad.</span></p>
+            </td>
+            <td class="cart_right"></td>
+        </tr>
+        <tr>
+            <td class="cart_left"></td>
+            <td colspan="2">
+                <div class="left">
+                    <input type="submit" value="Recalculate" class="recalc" alt="Пересчитать" />
+                </div>
+            </td>
+            <td colspan="4">
+                <div class="right">
+                    <input type="hidden" name="func" value="cart" />
+                    <a routerLink="/order" class="checkout">Checkout</a>
+                </div>
+            </td>
+            <td class="cart_right"></td>
+        </tr>
+        <tr>
+            <td colspan="8" id="cart_bottom"></td>
+        </tr>
+    </table>
+    </form>
+</div>
